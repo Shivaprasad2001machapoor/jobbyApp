@@ -1,0 +1,13 @@
+.profile-container {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/profile-bg.png');
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  background-size: cover;
+}
+.filter-container {
+  padding: 15px;
+}
+.name {
+  color: aliceblue;
+}

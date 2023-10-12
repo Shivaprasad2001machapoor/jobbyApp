@@ -1,0 +1,46 @@
+.all-jobs-section {
+  height: 100%;
+  background-color: black;
+  color: aliceblue;
+}
+.all-jobs-section {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+  .all-jobs-section {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .all-jobs-container {
+    width: 70%;
+  }
+}
+.local {
+  display: flex;
+  flex-direction: row;
+}
+.filter-container {
+  width: 35vw;
+}
+.searchbar {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  font-family: 'Roboto';
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  border-radius: 8px;
+  height: 25px;
+  margin-left: 50px;
+  width: 200px;
+}
+.all-products-container {
+  padding: 25px;
+}
