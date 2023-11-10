@@ -44,3 +44,13 @@
 .all-products-container {
   padding: 25px;
 }
+.profile-img {
+  height: 50px;
+  width: 50px;
+}
+.name {
+  color: black;
+}
+.bio {
+  color: black;
+}
