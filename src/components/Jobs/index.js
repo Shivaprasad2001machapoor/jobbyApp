@@ -132,11 +132,11 @@ class Jobs extends Component {
     const response = await fetch(apiUrl, options)
     if (response.ok) {
       const fetchedData = await response.json()
-      const updatedData = fetchedData.profile_details.map(detail => ({
-        name: detail.name,
-        profileImageUrl: detail.profile_image_url,
-        shortBio: detail.short_bio,
-      }))
+      const updatedData = {
+        name: fetchedData.profile_details.name,
+        profileImageUrl: fetchedData.profile_details.profile_image_url,
+        shortBio: fetchedData.profile_details.short_bio,
+      }
       this.setState({
         profileData: updatedData,
         apiStatus: apiStatusConstants.success,

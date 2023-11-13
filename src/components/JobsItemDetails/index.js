@@ -1,10 +1,12 @@
 import './index.css'
 import {IoMdStar} from 'react-icons/io'
 import {FaMapMarker, FaBriefcase} from 'react-icons/fa'
+import {Link} from 'react-router-dom'
 
 const JobsItemDetails = props => {
   const {jobData} = props
   const {
+    id,
     companyLogoUrl,
     employmentType,
     jobDescription,
@@ -14,7 +16,7 @@ const JobsItemDetails = props => {
     title,
   } = jobData
   return (
-    <div className="job-container">
+    <Link to={`/jobs/${id}`} className="job-container">
       <div className="header">
         <img
           src={companyLogoUrl}
@@ -47,7 +49,7 @@ const JobsItemDetails = props => {
         <h1 className="descri-head">Description</h1>
         <p className="job-desc-text">{jobDescription}</p>
       </div>
-    </div>
+    </Link>
   )
 }
 export default JobsItemDetails
