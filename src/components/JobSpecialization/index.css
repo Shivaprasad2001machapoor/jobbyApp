@@ -75,3 +75,23 @@
   justify-content: space-around;
   align-items: center;
 }
+.skill-seter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.life-at-company {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.jobspecial-container {
+  background-color: #2c364c;
+  color: #f8fafc;
+}
+.skill-set {
+  display: flex;
+  flex-direction: row;
+}

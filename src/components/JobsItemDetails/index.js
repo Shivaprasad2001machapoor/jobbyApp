@@ -18,11 +18,7 @@ const JobsItemDetails = props => {
   return (
     <Link to={`/jobs/${id}`} className="job-container">
       <div className="header">
-        <img
-          src={companyLogoUrl}
-          alt={jobDescription}
-          className="company-logo"
-        />
+        <img src={companyLogoUrl} alt="company logo" className="company-logo" />
         <div className="desc">
           <h1 className="role">{title}</h1>
           <div className="star-rating">

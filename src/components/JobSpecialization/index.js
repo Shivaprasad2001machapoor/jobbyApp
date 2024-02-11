@@ -1,9 +1,11 @@
 import {Component} from 'react'
 import {IoMdStar} from 'react-icons/io'
 import {FaMapMarker, FaBriefcase} from 'react-icons/fa'
+import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
 import {withRouter} from 'react-router-dom'
 import './index.css'
+import Header from '../Header'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -82,28 +84,28 @@ class JobSpecialization extends Component {
     }
   }
 
-  render() {
-    const {apiStatus, jobDetails, similarJobs} = this.state
+  renderJobDetailSpecial = () => {
+    const {jobDetails, similarJobs} = this.state
     const {
       companyLogoUrl,
+      companyWebsiteUrl,
       employmentType,
       jobDescription,
       location,
       skills,
+      lifeAtCompany,
       packagePerAnnum,
       rating,
+      title,
     } = jobDetails
-    console.log(skills)
-    if (apiStatus === apiStatusConstants.inProgress) {
-      return <div>Loading...</div>
-    }
 
     return (
       <div className="jobspecial-container">
+        <Header />
         <div>
           <img
             src={companyLogoUrl}
-            alt="Company Logo"
+            alt="job details company logo"
             className="company-logo"
           />
           <div className="desc">
@@ -128,34 +130,50 @@ class JobSpecialization extends Component {
           </div>
           <hr />
           <div className="desc">
+            <h1>{title}</h1>
+            <div className="description-head-container">
+              <h1 className="descri-head">Description</h1>
+              <div className="desc-reight-container">
+                <a
+                  href={companyWebsiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visit
+                </a>
+              </div>
+            </div>
             <h1 className="descri-head">Description</h1>
             <p className="job-desc-text">{jobDescription}</p>
           </div>
           <div className="skills-container">
             <h1>skills</h1>
-            {skills.map(eachSkill => (
-              <div className="skill-set">
-                <img
-                  src={eachSkill.img_url}
-                  alt={eachSkill.name}
-                  className="skilllogo"
-                />
-              </div>
-            ))}
+            <ul className="skill-seter">
+              {skills.map(skill => (
+                <li key={skill.name} className="skill-set">
+                  <img src={skill.image_url} alt={skill.name} />
+                  <p>{skill.name}</p>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="life-of-employees">
-            <h1>life at corporate</h1>
+            <h1>Life at Company</h1>
+            <div className="life-at-company">
+              <p>{lifeAtCompany.description}</p>
+              <img src={lifeAtCompany.image_url} alt="life at company" />
+            </div>
           </div>
         </div>
 
         <div className="similar-job-container">
           <h1>Similar Jobs</h1>
-          <div className="jobby-simi">
+          <ul className="jobby-simi">
             {similarJobs.map(job => (
-              <div key={job.id} className="similar-job-post">
+              <li key={job.id} className="similar-job-post">
                 <img
                   src={job.companyLogoUrl}
-                  alt="Company Logo"
+                  alt="similar job company logo"
                   className="company-logo"
                 />
                 <div className="desc">
@@ -179,18 +197,59 @@ class JobSpecialization extends Component {
                   </div>
                   <p>{job.packagePerAnnum}</p>
                 </div>
-                <p>{job.employmentType}</p>
                 <hr />
                 <div className="desc">
                   <h1 className="descri-head">Description</h1>
                   <p className="job-desc-text">{job.jobDescription}</p>
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
+          <ul>
+            <p>helo</p>
+          </ul>
         </div>
       </div>
     )
+  }
+
+  renderJobDetailsFailureView = () => (
+    <div className="products-error-view-container">
+      <img
+        src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+        alt="failure view"
+        className="products-failure-img"
+      />
+      <h1 className="product-failure-heading-text">
+        Oops! Something Went Wrong
+      </h1>
+      <p className="products-failure-description">
+        We cannot seem to find the page you are looking for
+      </p>
+      <button type="button" onClick={this.getJobData}>
+        Retry
+      </button>
+    </div>
+  )
+
+  renderLoadingView = () => (
+    <div className="products-loader-container" data-testid="loader">
+      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    </div>
+  )
+
+  render() {
+    const {apiStatus} = this.state
+    switch (apiStatus) {
+      case apiStatusConstants.success:
+        return this.renderJobDetailSpecial()
+      case apiStatusConstants.failure:
+        return this.renderJobDetailsFailureView()
+      case apiStatusConstants.inProgress:
+        return this.renderLoadingView()
+      default:
+        return null
+    }
   }
 }
 
